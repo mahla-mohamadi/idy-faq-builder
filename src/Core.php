@@ -31,7 +31,7 @@ final class Core {
     public function create_log_table(): void {
         global $wpdb;
         
-        $table_name = $wpdb->prefix . 'plugin-skeleton';
+        $table_name = $wpdb->prefix . 'my_plugin_logs';
         $charset_collate = $wpdb->get_charset_collate();
 
         $sql = "CREATE TABLE $table_name (

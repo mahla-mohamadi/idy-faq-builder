@@ -13,6 +13,8 @@ find . -type f -exec sed -i 's/plugin-skeleton/your-plugin/g' {} +
 # 3. Replace namespace (in all files)
 find . -type f -exec sed -i 's/MyPlugin/YourPlugin/g' {} +
 
+also replace my_plugin_logs with your_plugin_logs
+
 Update composer.json
 {
     "autoload": {
