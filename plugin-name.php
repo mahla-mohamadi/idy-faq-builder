@@ -21,11 +21,12 @@ define('MY_PLUGIN_SLUG', 'plugin-skeleton');
 // Autoloader via Composer
 require_once MY_PLUGIN_PATH . 'vendor/autoload.php';
 
+register_activation_hook(__FILE__, [$core, 'global_activation']);
+
 // Initialize plugin
 add_action('plugins_loaded', function() {
     $core = \MyPlugin\Core::get_instance();
     $core->init();
     
     // Create logger table on activation
-    register_activation_hook(__FILE__, [$core, 'create_log_table']);
 });

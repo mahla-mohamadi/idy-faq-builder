@@ -46,7 +46,13 @@ final class Core {
         require_once ABSPATH . 'wp-admin/includes/upgrade.php';
         dbDelta($sql);
     }
-
+    public function global_activation(): void{
+        if (!current_user_can('activate_plugins')) {
+            return;
+        }
+        $instance = self::get_instance();
+        $instance->create_log_table();
+    }
     public function get_logger(): Logger {
         return $this->logger;
     }
