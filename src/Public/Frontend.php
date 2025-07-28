@@ -16,7 +16,7 @@ class Frontend {
 
     private function __construct(Logger $logger) {
         $this->logger = $logger;
-        $this->logger->log('Frontend initialized');
+        $this->logger->log('SYSTEM','Frontend Initialized');
     }
 
     private function __clone() {}
