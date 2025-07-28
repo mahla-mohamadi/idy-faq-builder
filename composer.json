@@ -1,0 +1,19 @@
+{
+    "name": "yourname/wp-plugin-skeleton",
+    "description": "WordPress Plugin Skeleton",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "MyPlugin\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.4"
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "composer dump-autoload -o"
+        ]
+    }
+}
