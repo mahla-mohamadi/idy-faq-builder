@@ -25,7 +25,8 @@ require_once MY_PLUGIN_PATH . 'vendor/autoload.php';
 // Register activation hook
 register_activation_hook(__FILE__, function() {
     require_once MY_PLUGIN_PATH . 'src/Core.php';
-    \MyPlugin\Core::global_activation();
+    $core = \MyPlugin\Core::get_instance();
+    $core->global_activation();
 });
 
 // Initialize plugin
