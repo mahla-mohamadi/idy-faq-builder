@@ -1,11 +1,11 @@
 {
-    "name": "yourname/wp-plugin-skeleton",
+    "name": "yourname/wp-idy-faq-builder",
     "description": "WordPress Plugin Skeleton",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
     "autoload": {
         "psr-4": {
-            "MyPlugin\\": "src/"
+            "IdyFaqBuilder\\": "src/"
         }
     },
     "require": {

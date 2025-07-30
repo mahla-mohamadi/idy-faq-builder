@@ -9,5 +9,5 @@ global $wpdb;
 delete_option('my_plugin_settings');
 
 // Drop log table
-$table_name = $wpdb->prefix . 'my_plugin_logs';
+$table_name = $wpdb->prefix . 'idy-faq-builder-logs';
 $wpdb->query("DROP TABLE IF EXISTS $table_name");

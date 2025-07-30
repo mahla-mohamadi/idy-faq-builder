@@ -5,7 +5,7 @@
         <?php
         settings_fields($this->option_group);
         do_settings_sections($this->settings_page);
-        submit_button(__('Save Settings', 'plugin-skeleton'));
+        submit_button(__('Save Settings', 'idy-faq-builder'));
         ?>
     </form>
 </div>

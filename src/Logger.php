@@ -1,5 +1,5 @@
 <?php
-namespace MyPlugin;
+namespace IdyFaqBuilder;
 
 final class Logger {
     private static $instance = null;
@@ -14,7 +14,7 @@ final class Logger {
 
     private function __construct() {
         global $wpdb;
-        $this->table_name = $wpdb->prefix . 'my_plugin_logs';
+        $this->table_name = $wpdb->prefix . 'idy-faq-builder-logs';
     }
 
     public function log(string $action, string $message): void {

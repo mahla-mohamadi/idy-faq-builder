@@ -1,7 +1,7 @@
 <?php
-namespace MyPlugin\Admin;
+namespace IdyFaqBuilder\Admin;
 
-use MyPlugin\Logger;
+use IdyFaqBuilder\Logger;
 
 class Dashboard {
     private static $instance = null;
@@ -20,8 +20,8 @@ class Dashboard {
 
     public function add_menu(): void {
         add_menu_page(
-            __('Plugin Dashboard', 'plugin-skeleton'),
-            __('My Plugin', 'plugin-skeleton'),
+            __('Plugin Dashboard', 'idy-faq-builder'),
+            __('My Plugin', 'idy-faq-builder'),
             'manage_options',
             MY_PLUGIN_SLUG,
             [$this, 'render_dashboard'],
@@ -31,8 +31,8 @@ class Dashboard {
         
         add_submenu_page(
             MY_PLUGIN_SLUG,
-            __('Settings', 'plugin-skeleton'),
-            __('Settings', 'plugin-skeleton'),
+            __('Settings', 'idy-faq-builder'),
+            __('Settings', 'idy-faq-builder'),
             'manage_options',
             MY_PLUGIN_SLUG . '-settings',
             [Settings::get_instance(), 'render_settings_page']
@@ -43,8 +43,8 @@ class Dashboard {
         $this->logger->log('dashboard_view', 'Dashboard page accessed');
         ?>
         <div class="wrap">
-            <h1><?php esc_html_e('Plugin Dashboard', 'plugin-skeleton'); ?></h1>
-            <p><?php esc_html_e('Welcome to your plugin dashboard.', 'plugin-skeleton'); ?></p>
+            <h1><?php esc_html_e('Plugin Dashboard', 'idy-faq-builder'); ?></h1>
+            <p><?php esc_html_e('Welcome to your plugin dashboard.', 'idy-faq-builder'); ?></p>
         </div>
         <?php
     }

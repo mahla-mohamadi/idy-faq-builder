@@ -1,5 +1,5 @@
 <?php
-namespace MyPlugin;
+namespace IdyFaqBuilder;
 
 final class Core {
     private static $instance = null;
@@ -18,20 +18,20 @@ final class Core {
     }
 
     public function init(): void {
-        // Initialize components
         if (is_admin()) {
-            \MyPlugin\Admin\Dashboard::init($this->logger);
-            $this->settings = \MyPlugin\Admin\Settings::get_instance();
+            \IdyFaqBuilder\Metabox\FaqBuilder::init($this->logger);
+            \IdyFaqBuilder\Admin\Dashboard::init($this->logger);
+            $this->settings = \IdyFaqBuilder\Admin\Settings::get_instance();
             $this->settings->init();
         } else {
-            \MyPlugin\Public\Frontend::init($this->logger);
+            \IdyFaqBuilder\Public\Frontend::init($this->logger);
         }
     }
 
     public function create_log_table(): void {
         global $wpdb;
         
-        $table_name = $wpdb->prefix . 'my_plugin_logs';
+        $table_name = $wpdb->prefix . 'idy-faq-builder-logs';
         $charset_collate = $wpdb->get_charset_collate();
 
         $sql = "CREATE TABLE $table_name (

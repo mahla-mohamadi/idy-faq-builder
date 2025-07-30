@@ -1,5 +1,5 @@
 Clone or download the ZIP:
-git clone https://github.com/hamedzargar/wp-plugin-skeleton.git
+git clone https://github.com/hamedzargar/wp-idy-faq-builder.git
 
 -----------------------------------------------------------------------
 
@@ -8,12 +8,12 @@ Renaming Process:
 mv plugin-name.php your-plugin.php
 
 # 2. Replace text domain (in all files)
-find . -type f -exec sed -i 's/plugin-skeleton/your-plugin/g' {} +
+find . -type f -exec sed -i 's/idy-faq-builder/your-plugin/g' {} +
 
 # 3. Replace namespace (in all files)
-find . -type f -exec sed -i 's/MyPlugin/YourPlugin/g' {} +
+find . -type f -exec sed -i 's/IdyFaqBuilder/YourPlugin/g' {} +
 
-also replace my_plugin_logs with your_plugin_logs
+also replace idy-faq-builder-logs with your_plugin_logs
 
 Update composer.json
 {
@@ -35,7 +35,7 @@ composer dump-autoload
 -----------------------------------------------------------------------
 
 Add Custom Logs
-\MyPlugin\Core::get_instance()
+\IdyFaqBuilder\Core::get_instance()
     ->get_logger()
     ->log('custom_action', 'Your log message');
 
@@ -47,9 +47,9 @@ Edit src/Admin/Settings.php:
 public function register_settings() {
     add_settings_field(
         'new_field',
-        __('New Field Label', 'plugin-skeleton'),
+        __('New Field Label', 'idy-faq-builder'),
         [$this, 'render_new_field'],  // Callback function
-        'plugin-skeleton-settings',   // Page slug
+        'idy-faq-builder-settings',   // Page slug
         'main_section'                // Section
     );
 }

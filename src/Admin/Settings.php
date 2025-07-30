@@ -1,7 +1,7 @@
 <?php
-namespace MyPlugin\Admin;
+namespace IdyFaqBuilder\Admin;
 
-use MyPlugin\Logger;
+use IdyFaqBuilder\Logger;
 
 final class Settings {
     private static $instance = null;
@@ -16,7 +16,7 @@ final class Settings {
     }
 
     private function __construct() {
-        $this->logger = \MyPlugin\Core::get_instance()->get_logger();
+        $this->logger = \IdyFaqBuilder\Core::get_instance()->get_logger();
     }
 
     public function init(): void {
@@ -32,14 +32,14 @@ final class Settings {
 
         add_settings_section(
             'main_section',
-            __('Main Settings', 'plugin-skeleton'),
+            __('Main Settings', 'idy-faq-builder'),
             [$this, 'render_section_header'],
             MY_PLUGIN_SLUG . '-settings'
         );
 
         add_settings_field(
             'example_text',
-            __('Example Text', 'plugin-skeleton'),
+            __('Example Text', 'idy-faq-builder'),
             [$this, 'render_text_field'],
             MY_PLUGIN_SLUG . '-settings',
             'main_section'
@@ -62,19 +62,19 @@ final class Settings {
                 <?php
                 settings_fields('my_plugin_settings_group');
                 do_settings_sections(MY_PLUGIN_SLUG . '-settings');
-                submit_button(__('Save Settings', 'plugin-skeleton'));
+                submit_button(__('Save Settings', 'idy-faq-builder'));
                 ?>
             </form>
             
             <div class="my-plugin-logs">
-                <h2><?php esc_html_e('Recent Activity', 'plugin-skeleton'); ?></h2>
+                <h2><?php esc_html_e('Recent Activity', 'idy-faq-builder'); ?></h2>
                 <table class="wp-list-table widefat fixed striped">
                     <thead>
                         <tr>
-                            <th><?php esc_html_e('Date', 'plugin-skeleton'); ?></th>
-                            <th><?php esc_html_e('Action', 'plugin-skeleton'); ?></th>
-                            <th><?php esc_html_e('Message', 'plugin-skeleton'); ?></th>
-                            <th><?php esc_html_e('User', 'plugin-skeleton'); ?></th>
+                            <th><?php esc_html_e('Date', 'idy-faq-builder'); ?></th>
+                            <th><?php esc_html_e('Action', 'idy-faq-builder'); ?></th>
+                            <th><?php esc_html_e('Message', 'idy-faq-builder'); ?></th>
+                            <th><?php esc_html_e('User', 'idy-faq-builder'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -86,7 +86,7 @@ final class Settings {
                             <td>
                                 <?php 
                                 $user = get_user_by('id', $log['user_id']);
-                                echo $user ? esc_html($user->display_name) : __('System', 'plugin-skeleton');
+                                echo $user ? esc_html($user->display_name) : __('System', 'idy-faq-builder');
                                 ?>
                             </td>
                         </tr>
@@ -99,7 +99,7 @@ final class Settings {
     }
 
     public function render_section_header(): void {
-        echo '<p>' . esc_html__('Configure the basic settings.', 'plugin-skeleton') . '</p>';
+        echo '<p>' . esc_html__('Configure the basic settings.', 'idy-faq-builder') . '</p>';
     }
 
     public function render_text_field(): void {

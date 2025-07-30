@@ -1,0 +1,197 @@
+/* Settings page styles */
+.my-plugin-logs {
+    margin-top: 30px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+}
+
+.my-plugin-logs table {
+    margin-top: 15px;
+}
+
+.my-plugin-logs th {
+    font-weight: 600;
+}
+/* Main Container */
+.idy-faq-admin-container {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+    margin: 20px 0;
+}
+
+/* FAQ Items Wrapper */
+.faq-items-wrapper {
+    display: grid;
+    grid-gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* FAQ Item Card */
+.faq-item-card {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.faq-item-card:hover {
+    border-color: #999;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* FAQ Item Header */
+.faq-item-header {
+    background: #f8f9f9;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+}
+
+.item-number {
+    background: #2271b1;
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* FAQ Item Content */
+.faq-item-content {
+    padding: 15px;
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #1d2327;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #8c8f94;
+    border-radius: 3px;
+    box-shadow: 0 0 0 transparent;
+    transition: all 0.2s ease;
+}
+
+.form-group input[type="text"]:focus {
+    border-color: #2271b1;
+    box-shadow: 0 0 0 1px #2271b1;
+    outline: 2px solid transparent;
+}
+
+.form-group textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 8px;
+    border: 1px solid #8c8f94;
+    border-radius: 3px;
+    box-shadow: 0 0 0 transparent;
+    transition: all 0.2s ease;
+}
+
+.form-group textarea:focus {
+    border-color: #2271b1;
+    box-shadow: 0 0 0 1px #2271b1;
+    outline: 2px solid transparent;
+}
+
+/* Buttons */
+.add-faq {
+    display: flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    justify-content: center !important;
+    line-height: 20px !important;
+    padding: 10px 15px !important;
+    max-height: unset !important;
+    border-radius: 4px !important;
+    border: none !important;
+    background-color: #2283ea !important;
+    margin-right: auto !important;
+    transition: all .4s;
+    &:hover{
+            background-color: #1a69be !important;
+    }
+    span{
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.remove-faq {
+    background: transparent;
+    border: none;
+    color: #a00;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    margin-right: auto;
+}
+
+.remove-faq:hover {
+    color: #dc3232;
+}
+
+.remove-faq:disabled {
+    color: #ddd;
+    cursor: not-allowed;
+}
+
+.remove-faq .dashicons {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+/* Sortable Styles */
+.sortable-faqs {
+    position: relative;
+}
+
+.faq-item-card.dragging {
+    opacity: 0.5;
+    background: #f0f6fc;
+    border: 1px dashed #2271b1;
+}
+
+.faq-item-placeholder {
+    background: #f0f6fc;
+    border: 1px dashed #2271b1;
+    margin-bottom: 20px;
+    height: 50px;
+}
+
+.handle {
+    cursor: move;
+    color: #646970;
+    margin-right: 10px;
+}
+
+.handle:hover {
+    color: #2271b1;
+}
+
+/* Add subtle hover effect for draggable items */
+.faq-item-card:hover .handle {
+    color: #2271b1;
+}
