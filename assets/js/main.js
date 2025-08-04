@@ -1,4 +1,5 @@
 jQuery(document).ready(function($) {
+    $('.color-picker').wpColorPicker();
     // Initialize sortable functionality
     $('.sortable-faqs').sortable({
         handle: '.handle',
@@ -55,4 +56,7 @@ jQuery(document).ready(function($) {
             });
         }
     });
+
 });
+
+

@@ -1,0 +1,84 @@
+ * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9f9f9;
+      margin: 100px auto;
+      direction: rtl;
+    }
+    .faqTemplateParent{
+        width: 80%;
+        padding: 20px 15px;
+        margin: auto;
+        >h1{
+            text-align: center;
+        }
+    }
+
+    .accordion {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 4px;
+      box-shadow: 0 5px 15px rgb(0 0 0 / 0.1);
+      overflow: hidden;
+    }
+    .line{
+        display: block;
+        height: 10px;
+        width: 100%;
+        
+      }
+
+    .accordion-item {
+      border-bottom: 1px solid #ddd;
+      background-color: transparent;
+     
+    }
+    .accordion-item:last-child {
+      border-bottom: none;
+    }
+
+    .accordion-header {
+      cursor: pointer;
+      padding: 18px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      color: #000;
+      user-select: none;
+      transition:  0.3s;
+      font-size: 16px;
+      background-color: rgba(255, 255, 255, 0.05);
+      
+    }
+    .accordion-header:hover {
+      background-color: #f1f1f1;
+    }
+
+
+    .accordion-header::after {
+      content: "◁";
+      font-size: 17px;
+      color: #000;
+      transition:  0.3s;
+    }
+    .accordion-item.active .accordion-header::after {
+      transform: rotate(-90deg);
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 25px;
+      transition: 0.3s ;
+      color: #000;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .accordion-item.active .accordion-content {
+      max-height: 300px;
+      padding: 15px 25px;
+    }

@@ -1,4 +1,12 @@
 <div class="idy-faq-admin-container">
+    <?php 
+        $options = get_option('my_plugin_settings');
+        $current_template = $options['faq_template'] ?? 'default';
+    ?>
+    <div class="template-notice">
+        <p>Current display template: <strong><?php echo esc_html(ucfirst($current_template)); ?></strong></p>
+        <p>Change template in <a href="<?php echo admin_url('admin.php?page=idy-faq-builder-settings'); ?>">plugin settings</a></p>
+    </div>
     <div class="faq-items-wrapper sortable-faqs">
         <?php if (!empty($faqs)) : ?>
             <?php foreach ($faqs as $index => $faq) : ?>

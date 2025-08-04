@@ -31,22 +31,108 @@ class Frontend {
             return $content;
         }
 
+        // Get all color settings
+        $options = get_option('my_plugin_settings', []);
+        $colors = [
+            'primary' => $options['faq_primary_color'] ?? '#03b5d2',
+            'background' => $options['faq_bg_color'] ?? '#ffffff'
+        ];
+        
+        // Pass colors to template
+        set_query_var('faq_colors', $colors);
+        
         // Buffer the template output
         ob_start();
-        include IDECHY_FAQ_PATH . 'templates/public/faq-display.php';
+        include $this->get_template_path($options['faq_template'] ?? 'default');
         return $content . ob_get_clean();
     }
+    private function enqueue_template_styles($template) {
+        if (!is_singular()) return;
 
+        $style_handle = 'idy-faq-frontend-' . $template;
+        $style_file = 'assets/css/frontend-' . $template . '.css';
+        
+        wp_enqueue_style(
+            $style_handle,
+            IDECHY_FAQ_URL . $style_file,
+            [],
+            filemtime(IDECHY_FAQ_PATH . $style_file)
+        );
+    }
+    private function get_template_path($template) {
+        $template_file = 'faq-display-' . $template . '.php';
+        $template_path = IDECHY_FAQ_PATH . 'templates/public/' . $template_file;
+        
+        // Fallback to default if template file doesn't exist
+        if (!file_exists($template_path)) {
+            $template_file = 'faq-display.php';
+        }
+        
+        return IDECHY_FAQ_PATH . 'templates/public/' . $template_file;
+    }
     public function enqueue_styles() {
         if (is_singular()) {
+            // Get all settings at once
+            $options = get_option('my_plugin_settings', []);
+            $template = $options['faq_template'] ?? 'default';
+            $primary_color = $options['faq_primary_color'] ?? '#03b5d2';
+            $bg_color = $options['faq_bg_color'] ?? '#ffffff';
+            
+            $this->enqueue_template_assets($template, $primary_color, $bg_color);
+        }
+    }
+    private function enqueue_template_assets($template, $primary_color, $bg_color) {
+        // Enqueue CSS
+        $css_handle = 'idy-faq-frontend-' . $template;
+        $css_file = 'assets/css/frontend-' . $template . '.css';
+        
+        // Fallback to default if template-specific file doesn't exist
+        if (!file_exists(IDECHY_FAQ_PATH . $css_file)) {
+            $css_file = 'assets/css/frontend.css';
+        }
+        
+        if (file_exists(IDECHY_FAQ_PATH . $css_file)) {
             wp_enqueue_style(
-                'idy-faq-frontend',
-                IDECHY_FAQ_URL . 'assets/css/frontend.css',
+                $css_handle,
+                IDECHY_FAQ_URL . $css_file,
                 [],
-                filemtime(IDECHY_FAQ_PATH . 'assets/css/frontend.css')
+                filemtime(IDECHY_FAQ_PATH . $css_file)
+            );
+            
+            // Dynamic CSS with both colors
+            $dynamic_css = "
+                .accordion {
+                    background-color: {$bg_color};
+                }
+                .accordion-item.active .svg,
+                .accordion-header:hover,
+                .accordion-item.active .accordion-header,
+                .accordion-item.active .line {
+                    color: {$primary_color};
+                    border-color: {$primary_color};
+                }
+            ";
+            
+            wp_add_inline_style($css_handle, $dynamic_css);
+        }
+        
+        // Enqueue JS
+        $js_handle = 'idy-faq-frontend-js-' . $template;
+        $js_file = 'assets/js/script-' . $template . '.js';
+        
+        if (!file_exists(IDECHY_FAQ_PATH . $js_file)) {
+            $js_file = 'assets/js/script.js';
+        }
+        
+        if (file_exists(IDECHY_FAQ_PATH . $js_file)) {
+            wp_enqueue_script(
+                $js_handle,
+                IDECHY_FAQ_URL . $js_file,
+                ['jquery'],
+                filemtime(IDECHY_FAQ_PATH . $js_file),
+                true
             );
         }
     }
-
     private function __clone() {}
 }

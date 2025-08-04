@@ -37,8 +37,22 @@ class Dashboard {
             MY_PLUGIN_SLUG . '-settings',
             [Settings::get_instance(), 'render_settings_page']
         );
+        add_action('admin_enqueue_scripts', [$this, 'enqueue_color_picker']);
     }
-
+    public function enqueue_color_picker($hook) {
+        if ($hook === 'toplevel_page_idy-faq-builder' || $hook === 'my-plugin_page_idy-faq-builder-settings') {
+            wp_enqueue_style('wp-color-picker');
+            wp_enqueue_script('wp-color-picker');
+            
+            wp_enqueue_script(
+                'idy-faq-admin-color-picker',
+                IDECHY_FAQ_URL . 'assets/js/admin-color-picker.js',
+                ['wp-color-picker'],
+                filemtime(IDECHY_FAQ_PATH . 'assets/js/admin-color-picker.js'),
+                true
+            );
+        }
+    }
     public function render_dashboard(): void {
         $this->logger->log('dashboard_view', 'Dashboard page accessed');
         ?>

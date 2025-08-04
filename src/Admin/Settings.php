@@ -44,8 +44,62 @@ final class Settings {
             MY_PLUGIN_SLUG . '-settings',
             'main_section'
         );
+        // Add color picker field
+        add_settings_field(
+            'faq_primary_color',
+            __('Primary Color', 'idy-faq-builder'),
+            [$this, 'render_color_field'],
+            MY_PLUGIN_SLUG . '-settings',
+            'main_section'
+        );
+        add_settings_field(
+            'faq_bg_color',
+            __('FAQ Background Color', 'idy-faq-builder'),
+            [$this, 'render_bg_color_field'],
+            MY_PLUGIN_SLUG . '-settings',
+            'main_section'
+        );
+        // Add template selection field
+        add_settings_field(
+            'faq_template',
+            __('FAQ Display Template', 'idy-faq-builder'),
+            [$this, 'render_template_field'],
+            MY_PLUGIN_SLUG . '-settings',
+            'main_section'
+        );
     }
-
+    public function render_bg_color_field(): void {
+        $options = get_option($this->option_name);
+        $color = $options['faq_bg_color'] ?? '#ffffff'; // Default white
+        ?>
+        <input type="text" 
+            name="<?php echo esc_attr($this->option_name); ?>[faq_bg_color]" 
+            value="<?php echo esc_attr($color); ?>" 
+            class="color-picker">
+        <?php
+    }
+    public function render_color_field(): void {
+        $options = get_option($this->option_name);
+        $color = $options['faq_primary_color'] ?? '#03b5d2'; // Default color
+        ?>
+        <input type="text" 
+            name="<?php echo esc_attr($this->option_name); ?>[faq_primary_color]" 
+            value="<?php echo esc_attr($color); ?>" 
+            class="color-picker">
+        <?php
+    }
+    public function render_template_field(): void {
+        $options = get_option($this->option_name);
+        $selected = $options['faq_template'] ?? 'default';
+        ?>
+        <select name="<?php echo esc_attr($this->option_name); ?>[faq_template]" class="regular-text">
+            <option value="default" <?php selected($selected, 'default'); ?>><?php _e('Default Template', 'idy-faq-builder'); ?></option>
+            <option value="style1" <?php selected($selected, 'style1'); ?>><?php _e('Style 1', 'idy-faq-builder'); ?></option>
+            <option value="style2" <?php selected($selected, 'style2'); ?>><?php _e('Style 2', 'idy-faq-builder'); ?></option>
+            <option value="style3" <?php selected($selected, 'style3'); ?>><?php _e('Style 3', 'idy-faq-builder'); ?></option>
+        </select>
+        <?php
+    }
     public function render_settings_page(): void {
         if (!current_user_can('manage_options')) {
             return;
@@ -118,19 +172,36 @@ final class Settings {
         
         if (isset($input['example_text'])) {
             $sanitized['example_text'] = sanitize_text_field($input['example_text']);
-            
-            // Log the setting change
-            $this->logger->log(
-                'settings_update', 
-                sprintf('Setting changed from "%s" to "%s"', 
-                    get_option($this->option_name)['example_text'] ?? '',
-                    $sanitized['example_text']
-                )
-            );
         }
         
+        if (isset($input['faq_template'])) {
+            $allowed_templates = ['default', 'style1', 'style2', 'style3'];
+            $sanitized['faq_template'] = in_array($input['faq_template'], $allowed_templates) 
+                ? $input['faq_template'] 
+                : 'default';
+                
+            $this->logger->log(
+                'settings_update', 
+                sprintf('FAQ template changed to "%s"', $sanitized['faq_template'])
+            );
+        }
+        if (isset($input['faq_primary_color'])) {
+            $sanitized['faq_primary_color'] = sanitize_hex_color($input['faq_primary_color']);
+            
+            $this->logger->log(
+                'settings_update', 
+                sprintf('FAQ primary color changed to "%s"', $sanitized['faq_primary_color'])
+            );
+        }
+        if (isset($input['faq_bg_color'])) {
+            $sanitized['faq_bg_color'] = sanitize_hex_color($input['faq_bg_color']);
+            
+            $this->logger->log(
+                'settings_update', 
+                sprintf('FAQ background color changed to "%s"', $sanitized['faq_bg_color'])
+            );
+        }
         return $sanitized;
     }
-
     private function __clone() {}
 }
