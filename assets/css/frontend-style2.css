@@ -8,20 +8,20 @@
       direction: rtl;
     }
     .faqTemplateParent{
-        width: 80%;
-        padding: 20px 15px;
         margin: auto;
-        >h1{
+        padding: 30px 15px;
+        >h2{
             text-align: center;
+            font-size: 26px;
+            margin-bottom: 30px;
         }
     }
-
     .accordion {
       max-width: 1400px;
       margin: 0 auto;
       background: #fff;
       border-radius: 4px;
-      box-shadow: 0 5px 15px rgb(0 0 0 / 0.1);
+      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.03);
       overflow: hidden;
     }
     .line{
@@ -30,7 +30,6 @@
         width: 100%;
         
       }
-
     .accordion-item {
       border-bottom: 1px solid #ddd;
       background-color: transparent;
@@ -39,10 +38,9 @@
     .accordion-item:last-child {
       border-bottom: none;
     }
-
     .accordion-header {
       cursor: pointer;
-      padding: 18px 25px;
+      padding: 20px 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -57,28 +55,30 @@
     .accordion-header:hover {
       background-color: #f1f1f1;
     }
-
-
-    .accordion-header::after {
-      content: "◁";
-      font-size: 17px;
-      color: #000;
-      transition:  0.3s;
-    }
-    .accordion-item.active .accordion-header::after {
-      transform: rotate(-90deg);
-    }
-
     .accordion-content {
-      max-height: 0;
+      display: none;
       overflow: hidden;
-      padding: 0 25px;
-      transition: 0.3s ;
+      padding: 25px 10px;
       color: #000;
-      font-size: 14px;
+      font-size: 13.5px;
       line-height: 1.6;
     }
-    .accordion-item.active .accordion-content {
-      max-height: 300px;
-      padding: 15px 25px;
+    .accordion-content p{
+      margin: 0;
+    }
+    .accordion-header svg{
+      transition: all .4s;
+      width: 25px;
+    }
+    
+    .active .accordion-header svg {
+      transform: rotate(-90deg);
+    }
+    .active .accordion-header {
+      background-color: #f8f8f8;
+    }
+    .accordion-header span{
+      font-size: 15px;
+      font-weight: normal;
+      width: calc(100% - 30px);
     }

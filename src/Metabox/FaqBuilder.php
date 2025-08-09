@@ -78,10 +78,14 @@ class FaqBuilder {
         update_post_meta($post_id, '_single_mb_single_faq', $faqs);
     }
     public function enqueue_faqbuilder_scripts() {
+        // Enqueue WordPress color picker scripts
+        wp_enqueue_style('wp-color-picker');
+        wp_enqueue_script('wp-color-picker');
+
         wp_enqueue_script(
             'idy-faq-admin', 
             IDECHY_FAQ_URL . 'assets/js/main.js', 
-            ['jquery', 'jquery-ui-sortable'], // Add jquery-ui-sortable as dependency
+            ['jquery', 'jquery-ui-sortable', 'wp-color-picker'], // Add wp-color-picker as dependency
             filemtime(IDECHY_FAQ_PATH . 'assets/js/main.js'), 
             true
         );

@@ -1,33 +1,34 @@
 <?php if (!empty($faqs)) : ?>
 <?php 
-    $colors = get_query_var('faq_colors', [
-        'primary' => '#03b5d2',
-        'background' => '#ffffff'
+    $settings = get_query_var('faq_settings', [
+        'title' => __('Frequently Asked Questions', 'idy-faq-builder'),
+        'colors' => [
+            'primary' => '#03b5d2',
+            'background' => '#ffffff'
+        ]
     ]);
+    extract($settings);
 ?>
 <style>
-  main{
-    background-color:#f9f9f9 ;
-  }
+
     .accordion-item.active .svg{
-      color: <?php echo esc_attr($primary_color); ?>;
-      border: 1px solid <?php echo esc_attr($primary_color); ?>;
+      color: <?php echo esc_attr($colors['primary']); ?>;
+      border: 1px solid <?php echo esc_attr($colors['primary']); ?>;
 
     }
-      .accordion-header:hover {
-      color: <?php echo esc_attr($primary_color); ?>;
+    .accordion-header:hover {
+      color: <?php echo esc_attr($colors['primary']); ?>;
     }
     .accordion-item.active .accordion-header{
-      color: <?php echo esc_attr($primary_color); ?>;
+      color: <?php echo esc_attr($colors['primary']); ?>;
     }
      .accordion-item.active .line{
-      border-bottom: 1px solid <?php echo esc_attr($primary_color); ?>;
-      color: <?php echo esc_attr($primary_color); ?>;
-
+      border-bottom: 1px solid <?php echo esc_attr($colors['primary']); ?>;
+      color: <?php echo esc_attr($colors['primary']); ?>;
     }
 </style>
-<main>
- <h1>سوالات</h1>
+<div class="faqTemplateParent">
+ <h2><?php echo esc_html($title); ?></h2>
     <div class="accordion" id="accordion">
         <?php foreach ($faqs as $faq) : ?>
             <div class="accordion-item">
@@ -43,5 +44,5 @@
             </div>
         <?php endforeach; ?>
     </div>
-</main>
+</div>
 <?php endif; ?>

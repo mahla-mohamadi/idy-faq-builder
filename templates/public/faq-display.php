@@ -1,6 +1,6 @@
 <?php if (!empty($faqs)) : ?>
 <div class="idy-faqs-frontend">
-    <h3>Frequently Asked Questions</h3>
+    <h3><?php echo esc_html($faq_settings['title']); ?></h3>
     <div class="faq-list">
         <?php foreach ($faqs as $faq) : ?>
             <div class="faq-item">

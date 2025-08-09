@@ -10,9 +10,8 @@
     <div class="faq-items-wrapper sortable-faqs">
         <?php if (!empty($faqs)) : ?>
             <?php foreach ($faqs as $index => $faq) : ?>
-                <div class="faq-item-card" data-index="<?php echo $index; ?>">
-                    <div class="faq-item-header">
-                        <span class="dashicons dashicons-menu handle"></span>
+                <div class="faq-item-card " data-index="<?php echo $index; ?>">
+                    <div class="faq-item-header handle">
                         <span class="item-number"><?php echo $index + 1; ?></span>
                         <button type="button" class="remove-faq">
                             <span class="dashicons dashicons-trash"></span>

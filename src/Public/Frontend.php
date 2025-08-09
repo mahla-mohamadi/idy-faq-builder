@@ -20,6 +20,7 @@ class Frontend {
         $this->logger->log('SYSTEM', 'Frontend Initialized');
     }
 
+    // Modify the display_faqs() method:
     public function display_faqs($content) {
         if (!is_singular() || !in_the_loop() || !is_main_query()) {
             return $content;
@@ -31,19 +32,23 @@ class Frontend {
             return $content;
         }
 
-        // Get all color settings
+        // Get all settings
         $options = get_option('my_plugin_settings', []);
-        $colors = [
-            'primary' => $options['faq_primary_color'] ?? '#03b5d2',
-            'background' => $options['faq_bg_color'] ?? '#ffffff'
+        $settings = [
+            'title' => $options['faq_section_title'] ?? __('Frequently Asked Questions', 'idy-faq-builder'),
+            'colors' => [
+                'primary' => $options['faq_primary_color'] ?? '#03b5d2',
+                'background' => $options['faq_bg_color'] ?? '#ffffff'
+            ],
+            'template' => $options['faq_template'] ?? 'default'
         ];
         
-        // Pass colors to template
-        set_query_var('faq_colors', $colors);
+        // Pass settings to template
+        set_query_var('faq_settings', $settings);
         
         // Buffer the template output
         ob_start();
-        include $this->get_template_path($options['faq_template'] ?? 'default');
+        include $this->get_template_path($settings['template']);
         return $content . ob_get_clean();
     }
     private function enqueue_template_styles($template) {
@@ -101,7 +106,7 @@ class Frontend {
             
             // Dynamic CSS with both colors
             $dynamic_css = "
-                .accordion {
+                .faqTemplateParent {
                     background-color: {$bg_color};
                 }
                 .accordion-item.active .svg,

@@ -29,7 +29,13 @@ final class Settings {
             $this->option_name,
             [$this, 'sanitize_settings']
         );
-
+        add_settings_field(
+            'faq_section_title',
+            __('FAQ Section Title', 'idy-faq-builder'),
+            [$this, 'render_section_title_field'],
+            MY_PLUGIN_SLUG . '-settings',
+            'main_section'
+        );
         add_settings_section(
             'main_section',
             __('Main Settings', 'idy-faq-builder'),
@@ -67,6 +73,17 @@ final class Settings {
             MY_PLUGIN_SLUG . '-settings',
             'main_section'
         );
+    }
+    // Add this new method to render the field:
+    public function render_section_title_field(): void {
+        $options = get_option($this->option_name);
+        $title = $options['faq_section_title'] ?? __('Frequently Asked Questions', 'idy-faq-builder');
+        ?>
+        <input type="text" 
+            name="<?php echo esc_attr($this->option_name); ?>[faq_section_title]" 
+            value="<?php echo esc_attr($title); ?>" 
+            class="regular-text">
+        <?php
     }
     public function render_bg_color_field(): void {
         $options = get_option($this->option_name);
@@ -183,6 +200,14 @@ final class Settings {
             $this->logger->log(
                 'settings_update', 
                 sprintf('FAQ template changed to "%s"', $sanitized['faq_template'])
+            );
+        }
+        if (isset($input['faq_section_title'])) {
+            $sanitized['faq_section_title'] = sanitize_text_field($input['faq_section_title']);
+            
+            $this->logger->log(
+                'settings_update', 
+                sprintf('FAQ section title changed to "%s"', $sanitized['faq_section_title'])
             );
         }
         if (isset($input['faq_primary_color'])) {
